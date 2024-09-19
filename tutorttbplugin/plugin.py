@@ -3,8 +3,8 @@ from __future__ import annotations
 import os
 from glob import glob
 
-import click
-import importlib_resources
+import pkg_resources
+
 from tutor import hooks
 
 from .__about__ import __version__
@@ -62,14 +62,18 @@ MY_INIT_TASKS: list[tuple[str, tuple[str, ...]]] = [
 # For each task added to MY_INIT_TASKS, we load the task template
 # and add it to the CLI_DO_INIT_TASKS filter, which tells Tutor to
 # run it as part of the `init` job.
-for service, template_path in MY_INIT_TASKS:
-    full_path: str = str(
-        importlib_resources.files("tutorttbplugin")
-        / os.path.join("templates", *template_path)
-    )
-    with open(full_path, encoding="utf-8") as init_task_file:
-        init_task: str = init_task_file.read()
-    hooks.Filters.CLI_DO_INIT_TASKS.add_item((service, init_task))
+#
+# mcdaniel: no init tasks to worry about.
+# for service, template_path in MY_INIT_TASKS:
+#     full_path: str = str(
+#         pkg_resources.resource_filename("tutorttbplugin", "templates"),
+#         "ttbplugin",
+#         "tasks",
+#         "lms"
+#     )
+#     with open(full_path, encoding="utf-8") as init_task_file:
+#         init_task: str = init_task_file.read()
+#     hooks.Filters.CLI_DO_INIT_TASKS.add_item((service, init_task))
 
 
 ########################################
@@ -129,11 +133,11 @@ hooks.Filters.IMAGES_PUSH.add_items(
 #  this section as-is :)
 ########################################
 
-hooks.Filters.ENV_TEMPLATE_ROOTS.add_items(
-    # Root paths for template files, relative to the project root.
-    [
-        str(importlib_resources.files("tutorttbplugin") / "templates"),
-    ]
+# Boilerplate code
+# Add the "templates" folder as a template root
+hooks.Filters.ENV_TEMPLATE_ROOTS.add_item(
+    # Root path for template files, relative to the project root.
+    pkg_resources.resource_filename("tutorttbplugin", "templates")
 )
 
 hooks.Filters.ENV_TEMPLATE_TARGETS.add_items(
@@ -157,7 +161,12 @@ hooks.Filters.ENV_TEMPLATE_TARGETS.add_items(
 
 # For each file in tutorttbplugin/patches,
 # apply a patch based on the file's name and contents.
-for path in glob(str(importlib_resources.files("tutorttbplugin") / "patches" / "*")):
+for path in glob(
+    os.path.join(
+        pkg_resources.resource_filename("tutorttbplugin", "patches"),
+        "*",
+    )
+):
     with open(path, encoding="utf-8") as patch_file:
         hooks.Filters.ENV_PATCHES.add_item((os.path.basename(path), patch_file.read()))
 
