@@ -50,7 +50,7 @@ setup(
     },
     entry_points={
         "tutor.plugin.v1": [
-            "ttbplugin = tutorttbplugin.plugin"
+            "ttb = tutorttbplugin.plugin"
         ]
     },
     classifiers=[
