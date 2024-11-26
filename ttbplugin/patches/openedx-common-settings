@@ -1,0 +1,13 @@
+# mcdaniel: the following settings originate from https://github.com/turn-The-Bus/tutor-contrib-ttbplugin
+# -----------------------------------------------------------------------------
+# Google Firebase credentials
+GOOGLE_FIREBASE_SERVICE_ACCOUNT_JSON={{ TTBPLUGIN_GOOGLE_FIREBASE_SERVICE_ACCOUNT_JSON }}
+INDTTBPLUGIN_GOOGLE_FIREBASE_CONFIG_JSON={{ TTBPLUGIN_GOOGLE_FIREBASE_CONFIG_JSON }}
+GOOGLE_FIREBASE_DATABASE_URL='{{ TTBPLUGIN_GOOGLE_FIREBASE_DATABASE_URL }}'
+TOASTR_CUSTOM_CSS_URL='{{ TTBPLUGIN_TOASTR_CUSTOM_CSS_URL }}'
+
+# Add the Firebase credentials to the MFE config API so that we
+# can access it in the frontend.
+MFE_CONFIG['GOOGLE_FIREBASE_CONFIG'] = {{ TTBPLUGIN_GOOGLE_FIREBASE_CONFIG_JSON }}
+MFE_CONFIG['TOASTR_CUSTOM_CSS_URL'] = '{{ TTBPLUGIN_TOASTR_CUSTOM_CSS_URL }}'
+# -----------------------------------------------------------------------------

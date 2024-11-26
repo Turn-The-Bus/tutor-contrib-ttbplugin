@@ -14,7 +14,7 @@ def load_readme():
 def load_about():
     about = {}
     with io.open(
-        os.path.join(HERE, "tutorttbplugin", "__about__.py"),
+        os.path.join(HERE, "ttbplugin", "__about__.py"),
         "rt",
         encoding="utf-8",
     ) as f:
@@ -41,7 +41,7 @@ setup(
     long_description_content_type="text/x-rst",
     packages=find_packages(exclude=["tests*"]),
     include_package_data=True,
-    python_requires=">=3.8",
+    python_requires=">=3.11",
     install_requires=["tutor>=18.0.0,<19.0.0"],
     extras_require={
         "dev": [
@@ -50,7 +50,7 @@ setup(
     },
     entry_points={
         "tutor.plugin.v1": [
-            "ttb = tutorttbplugin.plugin"
+            "ttb = ttbplugin.plugin"
         ]
     },
     classifiers=[
@@ -63,6 +63,5 @@ setup(
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
-        "Programming Language :: Python :: 3.12",
     ],
 )

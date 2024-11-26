@@ -1,6 +1,6 @@
 .DEFAULT_GOAL := help
 .PHONY: docs
-SRC_DIRS = ./tutorttbplugin
+SRC_DIRS = ./ttbplugin
 BLACK_OPTS = --exclude templates ${SRC_DIRS}
 
 # Warning: These checks are not necessarily run on every PR.

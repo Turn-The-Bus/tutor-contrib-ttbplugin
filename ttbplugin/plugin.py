@@ -12,13 +12,24 @@ from .__about__ import __version__
 ########################################
 # CONFIGURATION
 ########################################
-
+DEFAULT_FIREBASE_CONFIG = {
+  "apiKey": "YOUR_API_KEY",
+  "authDomain": "YOUR_AUTH_DOMAIN",
+  "projectId": "YOUR_PROJECT_ID",
+  "storageBucket": "YOUR_STORAGE_BUCKET",
+  "messagingSenderId": "YOUR_MESSAGING_SENDER_ID",
+  "appId": "YOUR_APP_ID"
+}
 hooks.Filters.CONFIG_DEFAULTS.add_items(
     [
         # Add your new settings that have default values here.
         # Each new setting is a pair: (setting_name, default_value).
         # Prefix your setting names with 'TTBPLUGIN_'.
         ("TTBPLUGIN_VERSION", __version__),
+        ("TTBPLUGIN_GOOGLE_FIREBASE_SERVICE_ACCOUNT_JSON", {}),
+        ("TTBPLUGIN_GOOGLE_FIREBASE_CONFIG_JSON", DEFAULT_FIREBASE_CONFIG),
+        ("TTBPLUGIN_GOOGLE_FIREBASE_DATABASE_URL", "SET-ME-PLEASE"),
+        ("TTBPLUGIN_TOASTR_CUSTOM_CSS_URL", "https://ttb-mumbai-prod-storage.s3.ap-south-1.amazonaws.com/static/css/push-notifications.css"),
     ]
 )
 
@@ -48,12 +59,12 @@ hooks.Filters.CONFIG_OVERRIDES.add_items(
 ########################################
 
 # To add a custom initialization task, create a bash script template under:
-# tutorttbplugin/templates/ttbplugin/tasks/
+# ttbplugin/templates/ttbplugin/tasks/
 # and then add it to the MY_INIT_TASKS list. Each task is in the format:
 # ("<service>", ("<path>", "<to>", "<script>", "<template>"))
 MY_INIT_TASKS: list[tuple[str, tuple[str, ...]]] = [
     # For example, to add LMS initialization steps, you could add the script template at:
-    # tutorttbplugin/templates/ttbplugin/tasks/lms/init.sh
+    # ttbplugin/templates/ttbplugin/tasks/lms/init.sh
     # And then add the line:
     ### ("lms", ("ttbplugin", "tasks", "lms", "init.sh")),
 ]
@@ -66,7 +77,7 @@ MY_INIT_TASKS: list[tuple[str, tuple[str, ...]]] = [
 # mcdaniel: no init tasks to worry about.
 # for service, template_path in MY_INIT_TASKS:
 #     full_path: str = str(
-#         pkg_resources.resource_filename("tutorttbplugin", "templates"),
+#         pkg_resources.resource_filename("ttbplugin", "templates"),
 #         "ttbplugin",
 #         "tasks",
 #         "lms"
@@ -137,14 +148,14 @@ hooks.Filters.IMAGES_PUSH.add_items(
 # Add the "templates" folder as a template root
 hooks.Filters.ENV_TEMPLATE_ROOTS.add_item(
     # Root path for template files, relative to the project root.
-    pkg_resources.resource_filename("tutorttbplugin", "templates")
+    pkg_resources.resource_filename("ttbplugin", "templates")
 )
 
 hooks.Filters.ENV_TEMPLATE_TARGETS.add_items(
     # For each pair (source_path, destination_path):
     # templates at ``source_path`` (relative to your ENV_TEMPLATE_ROOTS) will be
     # rendered to ``source_path/destination_path`` (relative to your Tutor environment).
-    # For example, ``tutorttbplugin/templates/ttbplugin/build``
+    # For example, ``ttbplugin/templates/ttbplugin/build``
     # will be rendered to ``$(tutor config printroot)/env/plugins/ttbplugin/build``.
     [
         ("ttbplugin/build", "plugins"),
@@ -159,11 +170,11 @@ hooks.Filters.ENV_TEMPLATE_TARGETS.add_items(
 #  this section as-is :)
 ########################################
 
-# For each file in tutorttbplugin/patches,
+# For each file in ttbplugin/patches,
 # apply a patch based on the file's name and contents.
 for path in glob(
     os.path.join(
-        pkg_resources.resource_filename("tutorttbplugin", "patches"),
+        pkg_resources.resource_filename("ttbplugin", "patches"),
         "*",
     )
 ):
