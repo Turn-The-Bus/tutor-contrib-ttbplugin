@@ -24,12 +24,12 @@ hooks.Filters.CONFIG_DEFAULTS.add_items(
     [
         # Add your new settings that have default values here.
         # Each new setting is a pair: (setting_name, default_value).
-        # Prefix your setting names with 'TTBPLUGIN_'.
-        ("TTBPLUGIN_VERSION", __version__),
-        ("TTBPLUGIN_GOOGLE_FIREBASE_SERVICE_ACCOUNT_JSON", {}),
-        ("TTBPLUGIN_GOOGLE_FIREBASE_CONFIG_JSON", DEFAULT_FIREBASE_CONFIG),
-        ("TTBPLUGIN_GOOGLE_FIREBASE_DATABASE_URL", "SET-ME-PLEASE"),
-        ("TTBPLUGIN_TOASTR_CUSTOM_CSS_URL", "https://ttb-mumbai-prod-storage.s3.ap-south-1.amazonaws.com/static/css/push-notifications.css"),
+        # Prefix your setting names with 'TTB_'.
+        ("TTB_VERSION", __version__),
+        ("TTB_GOOGLE_FIREBASE_SERVICE_ACCOUNT_JSON", {}),
+        ("TTB_GOOGLE_FIREBASE_CONFIG_JSON", DEFAULT_FIREBASE_CONFIG),
+        ("TTB_GOOGLE_FIREBASE_DATABASE_URL", "SET-ME-PLEASE"),
+        ("TTB_TOASTR_CUSTOM_CSS_URL", "https://ttb-mumbai-prod-storage.s3.ap-south-1.amazonaws.com/static/css/push-notifications.css"),
     ]
 )
 
@@ -38,9 +38,9 @@ hooks.Filters.CONFIG_UNIQUE.add_items(
         # Add settings that don't have a reasonable default for all users here.
         # For instance: passwords, secret keys, etc.
         # Each new setting is a pair: (setting_name, unique_generated_value).
-        # Prefix your setting names with 'TTBPLUGIN_'.
+        # Prefix your setting names with 'TTB_'.
         # For example:
-        ### ("TTBPLUGIN_SECRET_KEY", "{{ 24|random_string }}"),
+        ### ("TTB_SECRET_KEY", "{{ 24|random_string }}"),
     ]
 )
 
@@ -103,7 +103,7 @@ hooks.Filters.IMAGES_BUILD.add_items(
         ### (
         ###     "myimage",
         ###     ("plugins", "ttbplugin", "build", "myimage"),
-        ###     "docker.io/myimage:{{ TTBPLUGIN_VERSION }}",
+        ###     "docker.io/myimage:{{ TTB_VERSION }}",
         ###     (),
         ### ),
     ]
@@ -118,7 +118,7 @@ hooks.Filters.IMAGES_PULL.add_items(
         # To pull `myimage` with `tutor images pull myimage`, you would write:
         ### (
         ###     "myimage",
-        ###     "docker.io/myimage:{{ TTBPLUGIN_VERSION }}",
+        ###     "docker.io/myimage:{{ TTB_VERSION }}",
         ### ),
     ]
 )
@@ -132,7 +132,7 @@ hooks.Filters.IMAGES_PUSH.add_items(
         # To push `myimage` with `tutor images push myimage`, you would write:
         ### (
         ###     "myimage",
-        ###     "docker.io/myimage:{{ TTBPLUGIN_VERSION }}",
+        ###     "docker.io/myimage:{{ TTB_VERSION }}",
         ### ),
     ]
 )

@@ -35,8 +35,8 @@ pip install git+https://github.com/Turn-The-Bus/tutor-contrib-ttbplugin
 
 ```console
 tutor plugins enable ttbplugin
-tutor config save --set TTBPLUGIN_GOOGLE_FIREBASE_SERVICE_ACCOUNT_JSON='{}'
-                  --set TTBPLUGIN_GOOGLE_FIREBASE_CONFIG_JSON='{}'
-                  --set TTBPLUGIN_GOOGLE_FIREBASE_DATABASE_URL='https://somewhere.com'
-                  --set TTBPLUGIN_TOASTR_CUSTOM_CSS_URL='https://ttb-mumbai-prod-storage.s3.ap-south-1.amazonaws.com/static/css/push-notifications.css'
+tutor config save --set TTB_GOOGLE_FIREBASE_SERVICE_ACCOUNT_JSON='{}'
+                  --set TTB_GOOGLE_FIREBASE_CONFIG_JSON='{}'
+                  --set TTB_GOOGLE_FIREBASE_DATABASE_URL='https://somewhere.com'
+                  --set TTB_TOASTR_CUSTOM_CSS_URL='https://ttb-mumbai-prod-storage.s3.ap-south-1.amazonaws.com/static/css/push-notifications.css'
 ```
