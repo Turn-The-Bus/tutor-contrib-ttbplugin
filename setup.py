@@ -41,7 +41,7 @@ setup(
     long_description_content_type="text/x-rst",
     packages=find_packages(exclude=["tests*"]),
     include_package_data=True,
-    python_requires=">=3.11",
+    python_requires=">=3.10",
     install_requires=["tutor>=18.0.0,<19.0.0"],
     extras_require={
         "dev": [
